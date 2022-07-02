@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/users',[UserController::class, 'index']);
+Route::get('/users/{id}',[UserController::class, 'show']);
 
 Route::get('/viacep',[ViaCepController::class, 'index'])->name('viacep.index');
 Route::post('/viacep',[ViaCepController::class, 'index'])->name('viacep.index.post');
