@@ -27,7 +27,8 @@ class StoreUpdateUserFormRequest extends FormRequest
         $rules = [
             'name' => 'required|string|max:50|min:3',
             'email' => 'required|email|unique:users,email,{id},$id',
-            'password' => 'required|min:4|max:12'
+            'password' => 'required|min:4|max:12',
+            'image' => 'file'
         ];
 
         if($this->method('PUT')){

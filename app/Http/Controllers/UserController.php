@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUpdateUserFormRequest;
+
 class UserController extends Controller
 {
     public function __construct(User $user)
@@ -13,7 +14,7 @@ class UserController extends Controller
     }
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(5);
 
         return view('users.index', compact('users'));
     }
@@ -36,13 +37,17 @@ class UserController extends Controller
 
     public function store(StoreUpdateUserFormRequest $request)
     {
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = bcrypt($request->password);
-        // $user->save();
+        
+
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
+
+        if($request->image){
+            $file = $request['image'];
+            $path = $file->store('profile', 'public');
+            $data['image'] = $path;
+        }
+        
 
         $this->model->create($data);
         
