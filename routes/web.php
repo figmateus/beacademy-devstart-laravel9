@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
+    PostController,
     ViaCepController,
     UserController
 };
@@ -19,6 +20,9 @@ use App\Http\Controllers\{
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/posts',[PostController::class, 'index'])->name('posts.index');
+Route::get('/users/posts/{id}',[PostController::class, 'show'])->name('posts.show');
 
 Route::get('/users',[UserController::class, 'index'])->name('users.index');;
 Route::get('/users/{id}',[UserController::class, 'show'])->name('users.show');;

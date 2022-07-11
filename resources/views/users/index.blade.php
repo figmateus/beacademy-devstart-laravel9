@@ -2,10 +2,22 @@
 @section('title', 'Listagem de usuários')
 @section('body')
 <h1>Listagem de Usuarios</h1>
-<a class="btn btn-success" href="{{route('users.create')}}">Novo Usuário</a>
-<div class="mb-3">
-  <label for="image" class="form-label">Selecione uma imagem</label>
-  <input type="file" class="form-control form-control-md" id="image" name="image">
+<div class="container">
+  <div class="row">
+    <div class="col-sm mt-2 mb-5">
+      <a class="btn btn-success" href="{{route('users.create')}}">Novo Usuário</a>
+    </div>
+    <div class="col-sm mt-2 mb-5">
+      <form action="{{route('users.index')}}" method="GET">
+        @csrf
+        <div class="input-group">
+          <input type="search" class="form-control rounded" name="search">
+          <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
 </div>
 <table class="table">
     <thead>
@@ -14,6 +26,7 @@
         <th scope="col">ID</th>
         <th scope="col">Nome</th>
         <th scope="col">Email</th>
+        <th scope="col">Postagens</th>
         <th scope="col">Data Cadastro</th>
         <th scope="col">Ações</th>
       </tr>
@@ -29,6 +42,9 @@
         <th scope="row">{{$user->id}}</th>
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
+        <td>
+          <a class="btn btn-outline-dark" href="{{route('posts.show', $user->id)}}">Postagens - {{$user->posts->count()}}</a>
+        </td>
         <td>{{date('d/m/Y - H:i',strtotime($user->created_at))}}</td>
         <td><a class="btn btn-info text-white" href="{{route('users.show', $user->id)}}">Visualizar</a></td>
       </tr>
