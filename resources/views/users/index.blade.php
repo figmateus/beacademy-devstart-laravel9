@@ -1,8 +1,25 @@
 @extends('template.user')
 @section('title', 'Listagem de Usuários')
 @section('body')
-    <h1>Listagem de Usuários</h1>
-
+<h1>Listagem de Usuários</h1>
+@if (session()->has('Create'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Sucesso!</strong> {{session()->get('create')}}.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+@if (session()->has('edit'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Sucesso!</strong> {{session()->get('edit')}}.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+@if (session()->has('delete'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Sucesso!</strong> {{session()->get('delete')}}.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
     <div class="container">
         <div class="row">
             <div class="col-sm mt-2 mb-5">

@@ -1,6 +1,11 @@
 @extends('template.user')
 @section('title', "Usuário {{$user->name}}")
 @section('body')
+@if (session()->has('Edite'))
+<div class="alert alert-primary" role="alert">
+  Usuário editado com sucesso!
+</div>
+@endif
 <h1>Usuario {{$user->name}}</h1>
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -29,6 +34,12 @@
     <div class="mb-3">
       <label for="image" class="form-label">Selecione uma imagem</label>
       <input type="file" class="form-control form-control-md" id="image" name="image">
+    </div>
+    <div class="form-check mb-5">
+      <input class="form-check-input" type="checkbox" value="1" id="is_admin" name="is_admin">
+      <label class="form-check-label" for="flexCheckDefault">
+        Administrador
+      </label>
     </div>
     <button type="submit" class="btn btn-primary">Atualizar</button>
   </form>
