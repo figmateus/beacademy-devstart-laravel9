@@ -11,7 +11,7 @@
       </ul>
     </div>
 @endif
-<form method="POST" action="{{route('users.store')}}" enctype="multipart/form-data">
+<form method="POST"  enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <label for="name" class="form-label">Nome</label>

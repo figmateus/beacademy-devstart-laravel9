@@ -18,24 +18,21 @@ class UserController extends Controller
         $users = $this->model->getUsers(
             $request->search ?? ''
         );
-
         return view('users.index', compact('users'));
     }
 
     public function show($id)
     {
         
-
-        if($user = User::find($id)){
+        // $user = User::find($id);
+        if(!$users = User::find($id)){
             return redirect()->route('users.index');
         }
 
-        $user->load('teams');
+        // $team = Team::find($id);
+        // $team->load('users');
 
-        $team = Team::find($id);
-        $team->load('users');
-
-        return view('users.show', compact('user'));
+        return view('users.show', compact('users'));
     }
 
     public function create() 
@@ -45,8 +42,6 @@ class UserController extends Controller
 
     public function store(StoreUpdateUserFormRequest $request)
     {
-        
-
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
 
@@ -56,7 +51,6 @@ class UserController extends Controller
             $data['image'] = $path;
         }
         
-
         $this->model->create($data);
         
         return redirect()->route('users.index');
@@ -67,7 +61,9 @@ class UserController extends Controller
         if(!$user = $this->model->find($id)){
             return redirect()->route('users.index');
         }
-        return view('users.edit',compact($user));
+        return view('users.edit',[
+           'user' => $user
+        ]);
     }
 
     public function update(StoreUpdateUserFormRequest $request, $id) 
@@ -94,5 +90,10 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index');
+    }
+
+    public function admin() 
+    {
+        return view('admin.index');
     }
 }

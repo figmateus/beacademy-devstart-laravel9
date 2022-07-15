@@ -1,7 +1,7 @@
 @extends('template.user')
 @section('title', 'Visualizar Usuário')
 @section('body')
-<h1>Usuario: {{$user->name}}</h1>
+<h1>Usuario: {{$users->name}}</h1>
 <table class="table">
   <thead class="text-center">
       <tr>
@@ -12,16 +12,16 @@
         <th scope="col">Ações</th>
       </tr>
     </thead>
-    @foreach ($users as $user)
+    {{-- @foreach ($users as $user) --}}
     <tbody class="text-center">
       <tr>
-        <th scope="row">{{$user->id}}</th>
-        <td>{{$user->name}}</td>
-        <td>{{$user->email}}</td>
-        <td>{{date('d/m/Y - H:i',strtotime($user->created_at))}}</td>
+        <th scope="row">{{$users->id}}</th>
+        <td>{{$users->name}}</td>
+        <td>{{$users->email}}</td>
+        <td>{{date('d/m/Y - H:i',strtotime($users->created_at))}}</td>
         <td>
-            <a class="btn btn-warning text-white" href="{{route('users.edit', $user->id)}}">Editar</a>
-            <form action="{{route('users.destroy', $user->id)}}" method="POST">
+            <a class="btn btn-warning text-white" href="{{route('users.edit', $users->id)}}">Editar</a>
+            <form action="{{route('users.destroy', $users->id)}}" method="POST">
               @method('DELETE')
               @csrf
               <button class="btn btn-danger text-white" type="submit">Deletar</button>
@@ -29,6 +29,6 @@
         </td>
       </tr>
     </tbody>
-    @endforeach
+    {{-- @endforeach --}}
   </table>    
 @endsection

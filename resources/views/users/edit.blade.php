@@ -1,7 +1,7 @@
 @extends('template.user')
 @section('title', "Usuário {{$user->name}}")
 @section('body')
-<h1>Usuario {{$$user->name}}</h1>
+<h1>Usuario {{$user->name}}</h1>
 @if ($errors->any())
     <div class="alert alert-danger">
       <ul>
