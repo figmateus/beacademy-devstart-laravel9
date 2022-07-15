@@ -18,7 +18,7 @@
         <th scope="row">{{$users->id}}</th>
         <td>{{$users->name}}</td>
         <td>{{$users->email}}</td>
-        <td>{{date('d/m/Y - H:i',strtotime($users->created_at))}}</td>
+        <td>{{formatDateTime($users->created_at)}}</td>
         <td>
             <a class="btn btn-warning text-white" href="{{route('users.edit', $users->id)}}">Editar</a>
             <form action="{{route('users.destroy', $users->id)}}" method="POST">
